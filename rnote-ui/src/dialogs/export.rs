@@ -6,6 +6,7 @@ use crate::canvas::{self, RnCanvas};
 use crate::{config, RnAppWindow};
 use adw::prelude::*;
 use gettextrs::gettext;
+use gtk4::FilterListModel;
 use gtk4::{
     gio, glib, glib::clone, Builder, Button, Dialog, FileDialog, FileFilter, Label, ResponseType,
     SpinButton, Switch,
@@ -26,10 +27,13 @@ pub(crate) async fn dialog_save_doc_as(appwindow: &RnAppWindow, canvas: &RnCanva
     filter.add_suffix("rnote");
     filter.set_name(Some(&gettext(".rnote")));
 
+    let filters = FilterListModel::builder().filter(&filter).build();
+
     let filedialog = FileDialog::builder()
         .title(gettext("Save Document As"))
         .modal(true)
         .accept_label(gettext("Save"))
+        .filters(&filters)
         .default_filter(&filter)
         .build();
 
@@ -753,10 +757,13 @@ pub(crate) async fn filechooser_export_engine_state(appwindow: &RnAppWindow, can
         Some(" - engine state.json"),
     );
 
+    let filters = FilterListModel::builder().filter(&filter).build();
+
     let filedialog = FileDialog::builder()
         .title(gettext("Export Engine State"))
         .modal(true)
         .accept_label(gettext("Export"))
+        .filters(&filters)
         .default_filter(&filter)
         .initial_name(&initial_name)
         .build();
@@ -800,10 +807,13 @@ pub(crate) async fn filechooser_export_engine_config(appwindow: &RnAppWindow, ca
         Some(" - engine config.json"),
     );
 
+    let filters = FilterListModel::builder().filter(&filter).build();
+
     let filedialog = FileDialog::builder()
         .title(gettext("Export Engine Config"))
         .modal(true)
         .accept_label(gettext("Export"))
+        .filters(&filters)
         .default_filter(&filter)
         .initial_name(&initial_name)
         .build();

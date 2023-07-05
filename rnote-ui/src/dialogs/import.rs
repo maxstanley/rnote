@@ -7,8 +7,8 @@ use crate::{config, RnAppWindow};
 use adw::prelude::*;
 use gettextrs::gettext;
 use gtk4::{
-    gio, glib, glib::clone, Builder, Dialog, FileDialog, FileFilter, Label, ResponseType,
-    SpinButton, ToggleButton,
+    gio, glib, glib::clone, Builder, Dialog, FileDialog, FileFilter, FilterListModel, Label,
+    ResponseType, SpinButton, ToggleButton,
 };
 use num_traits::ToPrimitive;
 use rnote_engine::engine::import::{PdfImportPageSpacing, PdfImportPagesType};
@@ -77,10 +77,13 @@ pub(crate) async fn filedialog_open_doc(appwindow: &RnAppWindow) {
     filter.add_suffix("rnote");
     filter.set_name(Some(&gettext(".rnote")));
 
+    let filters = FilterListModel::builder().filter(&filter).build();
+
     let filedialog = FileDialog::builder()
         .title(gettext("Open File"))
         .modal(true)
         .accept_label(gettext("Open"))
+        .filters(&filters)
         .default_filter(&filter)
         .build();
 
@@ -113,10 +116,13 @@ pub(crate) async fn filedialog_import_file(appwindow: &RnAppWindow) {
     filter.add_suffix("jpeg");
     filter.set_name(Some(&gettext("Jpg, Pdf, Png, Svg, Xopp")));
 
+    let filters = FilterListModel::builder().filter(&filter).build();
+
     let dialog = FileDialog::builder()
         .title(gettext("Import File"))
         .modal(true)
         .accept_label(gettext("Import"))
+        .filters(&filters)
         .default_filter(&filter)
         .build();
 

@@ -24,7 +24,7 @@ use std::rc::Rc;
 pub(crate) async fn dialog_save_doc_as(appwindow: &RnAppWindow, canvas: &RnCanvas) {
     let filter = FileFilter::new();
     filter.add_mime_type("application/rnote");
-    filter.add_suffix("rnote");
+    filter.add_suffix("*.rnote");
     filter.set_name(Some(&gettext(".rnote")));
 
     let filters = FilterListModel::builder().filter(&filter).build();

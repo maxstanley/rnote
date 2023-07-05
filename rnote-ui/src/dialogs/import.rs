@@ -74,7 +74,7 @@ pub(crate) async fn dialog_open_overwrite(
 pub(crate) async fn filedialog_open_doc(appwindow: &RnAppWindow) {
     let filter = FileFilter::new();
     filter.add_mime_type("application/rnote");
-    filter.add_suffix("rnote");
+    filter.add_suffix("*.rnote");
     filter.set_name(Some(&gettext(".rnote")));
 
     let filters = FilterListModel::builder().filter(&filter).build();

@@ -325,13 +325,13 @@ impl RnWorkspaceBrowser {
         filefilter.add_mime_type("image/jpeg");
         filefilter.add_mime_type("application/x-xopp");
         filefilter.add_mime_type("inode/directory");
-        filefilter.add_suffix("rnote");
-        filefilter.add_suffix("pdf");
-        filefilter.add_suffix("xopp");
-        filefilter.add_suffix("svg");
-        filefilter.add_suffix("png");
-        filefilter.add_suffix("jpg");
-        filefilter.add_suffix("jpeg");
+        filefilter.add_suffix("*.rnote");
+        filefilter.add_suffix("*.pdf");
+        filefilter.add_suffix("*.xopp");
+        filefilter.add_suffix("*.svg");
+        filefilter.add_suffix("*.png");
+        filefilter.add_suffix("*.jpg");
+        filefilter.add_suffix("*.jpeg");
 
         let hidden_filter = CustomFilter::new(|file| {
             let fileinfo = file.downcast_ref::<gio::FileInfo>().unwrap();
